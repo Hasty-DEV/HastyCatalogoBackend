@@ -12,8 +12,6 @@ class Owner extends Model<OwnerType> {
   public stores!: object;
   public email!: string;
   public password!: string;
-  public created_at!: Date;
-  public updated_at!: Date;
 }
 
 Owner.init(
@@ -45,7 +43,7 @@ Owner.init(
     },
     stores: {
       type: DataTypes.JSON,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -55,17 +53,7 @@ Owner.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      field: 'created_at',
-    },
-    updated_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      field: 'updated_at',
-    },
+    }
   },
   {
     sequelize,

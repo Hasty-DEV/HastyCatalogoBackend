@@ -9,13 +9,17 @@ export const ExistingEmailRepositorie = async (
     let existingUserByEmail = await Owner.findOne({
       where: { email: email },
     });
-    res
-      .status(422)
-      .send(`Email ${existingUserByEmail} já está sendo utilizado`);
-    return;
+    if (existingUserByEmail) {
+      res
+        .status(422)
+        .send(`Email ${existingUserByEmail.email} já está sendo utilizado`);
+      return false;
+    } else {
+      return true;
+    }
   } catch (err) {
     console.error("Erro ao consultar o banco de dados: " + err);
     res.status(500).send("Erro ao consultar o banco de dados");
-    return;
+    return false;
   }
 };
